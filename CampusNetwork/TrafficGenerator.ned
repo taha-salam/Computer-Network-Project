@@ -1,16 +1,22 @@
-simple TrafficGenerator
+import inet.applications.contract.IApp;
+
+simple TrafficGenerator like IApp
 {
     parameters:
-        string trafficProfile = default("CBR"); // "CBR" or "Bursty"
-        int packetSize = default(512);           // bytes
-        double sendInterval = default(0.01);     // seconds (CBR)
-        int burstSize = default(10);             // packets per burst
-        double burstGap = default(1.0);          // silence between bursts
-        string destAddress = default("10.0.0.1");
-        double startTime = default(1.0);
-        double stopTime = default(180.0);
+        string trafficProfile = default("CBR");
+        int packetSize = default(512);
+        double sendInterval @unit(s) = default(0.01s);
+        int burstSize = default(10);
+        double burstGap @unit(s) = default(1.0s);
+        string destAddress = default("10.0.6.1");
+        double startTime @unit(s) = default(1s);
+        double stopTime @unit(s) = default(180s);
+        int destPort = default(1234);
+        int localPort = default(-1);
+
         @display("i=block/source");
 
     gates:
-        output out;
+        input socketIn @labels(udp) @gateSource;
+        output socketOut @labels(udp) @gateSink;
 }
