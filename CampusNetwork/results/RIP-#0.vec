@@ -1,8 +1,8 @@
 version 3
-run RIP-0-20260509-15:59:08-1892
+run RIP-0-20260509-20:04:30-8008
 attr configname RIP
-attr datetime 20260509-15:59:08
-attr datetimef 20260509-155908
+attr datetime 20260509-20:04:30
+attr datetimef 20260509-200430
 attr experiment RIP
 attr inifile omnetpp.ini
 attr iterationvars ""
@@ -10,7 +10,7 @@ attr iterationvarsd ""
 attr iterationvarsf ""
 attr measurement ""
 attr network CampusNetwork
-attr processid 1892
+attr processid 8008
 attr repetition 0
 attr replication #0
 attr resultdir results
@@ -41,20 +41,25 @@ config record-eventlog false
 config debug-on-errors false
 config **.vector-recording false
 config **.scalar-recording true
+config *.configurator.typename Ipv4NetworkConfigurator
+config *.configurator.config "xml(\"<config>     <interface hosts='coreRouter' towards='seRouter'    address='10.0.10.1'  netmask='255.255.255.252'/>     <interface hosts='seRouter'   towards='coreRouter'  address='10.0.10.2'  netmask='255.255.255.252'/>     <interface hosts='coreRouter' towards='eeRouter'    address='10.0.10.5'  netmask='255.255.255.252'/>     <interface hosts='eeRouter'   towards='coreRouter'  address='10.0.10.6'  netmask='255.255.255.252'/>     <interface hosts='coreRouter' towards='bbaRouter'   address='10.0.10.9'  netmask='255.255.255.252'/>     <interface hosts='bbaRouter'  towards='coreRouter'  address='10.0.10.10' netmask='255.255.255.252'/>     <interface hosts='coreRouter' towards='adminRouter' address='10.0.10.13' netmask='255.255.255.252'/>     <interface hosts='adminRouter' towards='coreRouter' address='10.0.10.14' netmask='255.255.255.252'/>     <interface hosts='coreRouter' towards='dnsServer'   address='10.0.10.17' netmask='255.255.255.252'/>     <interface hosts='dnsServer'  towards='coreRouter'  address='10.0.10.18' netmask='255.255.255.252'/>     <interface hosts='coreRouter' towards='appServer'   address='10.0.10.21' netmask='255.255.255.252'/>     <interface hosts='appServer'  towards='coreRouter'  address='10.0.10.22' netmask='255.255.255.252'/>     <interface hosts='seRouter' towards='seHost1' address='10.0.1.1' netmask='255.255.255.252'/>     <interface hosts='seHost1'  towards='seRouter' address='10.0.1.2' netmask='255.255.255.252'/>     <interface hosts='seRouter' towards='seHost2' address='10.0.1.5' netmask='255.255.255.252'/>     <interface hosts='seHost2'  towards='seRouter' address='10.0.1.6' netmask='255.255.255.252'/>     <interface hosts='seRouter' towards='seHost3' address='10.0.1.9' netmask='255.255.255.252'/>     <interface hosts='seHost3'  towards='seRouter' address='10.0.1.10' netmask='255.255.255.252'/>     <interface hosts='eeRouter' towards='eeHost1' address='10.0.2.1' netmask='255.255.255.252'/>     <interface hosts='eeHost1'  towards='eeRouter' address='10.0.2.2' netmask='255.255.255.252'/>     <interface hosts='eeRouter' towards='eeHost2' address='10.0.2.5' netmask='255.255.255.252'/>     <interface hosts='eeHost2'  towards='eeRouter' address='10.0.2.6' netmask='255.255.255.252'/>     <interface hosts='eeRouter' towards='eeHost3' address='10.0.2.9' netmask='255.255.255.252'/>     <interface hosts='eeHost3'  towards='eeRouter' address='10.0.2.10' netmask='255.255.255.252'/>     <interface hosts='bbaRouter' towards='bbaHost1' address='10.0.3.1' netmask='255.255.255.252'/>     <interface hosts='bbaHost1'  towards='bbaRouter' address='10.0.3.2' netmask='255.255.255.252'/>     <interface hosts='bbaRouter' towards='bbaHost2' address='10.0.3.5' netmask='255.255.255.252'/>     <interface hosts='bbaHost2'  towards='bbaRouter' address='10.0.3.6' netmask='255.255.255.252'/>     <interface hosts='bbaRouter' towards='bbaHost3' address='10.0.3.9' netmask='255.255.255.252'/>     <interface hosts='bbaHost3'  towards='bbaRouter' address='10.0.3.10' netmask='255.255.255.252'/>     <interface hosts='adminRouter' towards='adminHost1' address='10.0.4.1' netmask='255.255.255.252'/>     <interface hosts='adminHost1'  towards='adminRouter' address='10.0.4.2' netmask='255.255.255.252'/>     <interface hosts='adminRouter' towards='adminHost2' address='10.0.4.5' netmask='255.255.255.252'/>     <interface hosts='adminHost2'  towards='adminRouter' address='10.0.4.6' netmask='255.255.255.252'/>     <interface hosts='adminRouter' towards='adminHost3' address='10.0.4.9' netmask='255.255.255.252'/>     <interface hosts='adminHost3'  towards='adminRouter' address='10.0.4.10' netmask='255.255.255.252'/>     <route hosts='seHost1 seHost2 seHost3'       destination='0.0.0.0' netmask='0.0.0.0' gateway='10.0.1.1'/>     <route hosts='eeHost1 eeHost2 eeHost3'       destination='0.0.0.0' netmask='0.0.0.0' gateway='10.0.2.1'/>     <route hosts='bbaHost1 bbaHost2 bbaHost3'    destination='0.0.0.0' netmask='0.0.0.0' gateway='10.0.3.1'/>     <route hosts='adminHost1 adminHost2 adminHost3' destination='0.0.0.0' netmask='0.0.0.0' gateway='10.0.4.1'/>     <route hosts='appServer'                     destination='0.0.0.0' netmask='0.0.0.0' gateway='10.0.10.21'/>     <route hosts='dnsServer'                     destination='0.0.0.0' netmask='0.0.0.0' gateway='10.0.10.17'/> </config>\")"
 config *.scenarioManager.script "xml(\"<script><at t='60.0'><set-channel-param src-module='coreRouter' src-gate='ethg$o[0]' par='disabled' value='true'/><set-channel-param src-module='seRouter' src-gate='ethg$o[0]' par='disabled' value='true'/></at><at t='120.0'><set-channel-param src-module='coreRouter' src-gate='ethg$o[0]' par='disabled' value='false'/><set-channel-param src-module='seRouter' src-gate='ethg$o[0]' par='disabled' value='false'/></at></script>\")"
 config **.seHost*.app[0].typename TrafficGenerator
 config **.eeHost*.app[0].typename TrafficGenerator
 config **.bbaHost*.app[0].typename TrafficGenerator
 config **.adminHost*.app[0].typename TrafficGenerator
 config *.appServer.app[0].typename UdpSink
-config *.appServer.app[0].localPort 1234
+config *.appServer.app[0].localPort 5000
 config **.app[0].trafficProfile "\"CBR\""
-config **.app[0].destAddress "\"10.0.6.1\""
-config **.app[0].destPort 1234
-config **.app[0].startTime 1s
+config **.app[0].destAddress "\"10.0.10.22\""
+config **.app[0].destPort 5000
+config **.app[0].localPort 5000
+config **.app[0].startTime 5s
 config **.app[0].stopTime 175s
 config **.app[0].packetSize 512
 config **.app[0].sendInterval 0.05s
+config **.app[0].burstSize 10
+config **.app[0].burstGap 1.0s
 
 vector 0 CampusNetwork.coreRouter.ethernet encapPk:vector(packetBytes) ETV
 attr interpolationmode none
