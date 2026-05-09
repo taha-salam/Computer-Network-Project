@@ -1,8 +1,8 @@
 version 3
-run OSPF-0-20260507-22:36:24-14844
+run OSPF-0-20260509-16:00:15-17856
 attr configname OSPF
-attr datetime 20260507-22:36:24
-attr datetimef 20260507-223624
+attr datetime 20260509-16:00:15
+attr datetimef 20260509-160015
 attr experiment OSPF
 attr inifile omnetpp.ini
 attr iterationvars ""
@@ -10,7 +10,7 @@ attr iterationvarsd ""
 attr iterationvarsf ""
 attr measurement ""
 attr network CampusNetwork
-attr processid 14844
+attr processid 17856
 attr repetition 0
 attr replication #0
 attr resultdir results
@@ -19,16 +19,32 @@ attr seedset 0
 config image-path ../inet4.5/images
 config description "OSPF Routing"
 config extends General
-config *.hasOspf true
+config *.configurator.addStaticRoutes false
+config *.configurator.addDefaultRoutes false
+config *.coreRouter.hasOspf true
+config *.seRouter.hasOspf true
+config *.eeRouter.hasOspf true
+config *.bbaRouter.hasOspf true
+config *.adminRouter.hasOspf true
 config *.*.ospf.areas[0].areaID "\"0.0.0.0\""
+config *.*.ospf.helloInterval 10s
+config *.*.ospf.deadInterval 40s
+config *.coreRouter.ospf.areas[0].interfaces[*].interfaceOutputCost 1
+config *.seRouter.ospf.areas[0].interfaces[*].interfaceOutputCost 10
+config *.eeRouter.ospf.areas[0].interfaces[*].interfaceOutputCost 10
+config *.bbaRouter.ospf.areas[0].interfaces[*].interfaceOutputCost 10
+config *.adminRouter.ospf.areas[0].interfaces[*].interfaceOutputCost 10
+config **.ospf.lsaCount.record true
+config **.pktsSent.record true
+config **.pktsReceived.record true
+config **.endToEndDelay.record true
 config network CampusNetwork
 config sim-time-limit 180s
 config record-eventlog false
 config debug-on-errors false
 config **.vector-recording false
 config **.scalar-recording true
-config **.app[0].sendInterval 0.05s
-config *.scenarioManager.script "xml(\"<script><at t='60.0'><set-param submodule='coreRouter.ethg[0].channel' name='disabled' value='true'/><set-param submodule='seRouter.ethg[0].channel' name='disabled' value='true'/></at><at t='120.0'><set-param submodule='coreRouter.ethg[0].channel' name='disabled' value='false'/><set-param submodule='seRouter.ethg[0].channel' name='disabled' value='false'/></at></script>\")"
+config *.scenarioManager.script "xml(\"<script><at t='60.0'><set-channel-param src-module='coreRouter' src-gate='ethg$o[0]' par='disabled' value='true'/><set-channel-param src-module='seRouter' src-gate='ethg$o[0]' par='disabled' value='true'/></at><at t='120.0'><set-channel-param src-module='coreRouter' src-gate='ethg$o[0]' par='disabled' value='false'/><set-channel-param src-module='seRouter' src-gate='ethg$o[0]' par='disabled' value='false'/></at></script>\")"
 config **.seHost*.app[0].typename TrafficGenerator
 config **.eeHost*.app[0].typename TrafficGenerator
 config **.bbaHost*.app[0].typename TrafficGenerator
@@ -41,6 +57,7 @@ config **.app[0].destPort 1234
 config **.app[0].startTime 1s
 config **.app[0].stopTime 175s
 config **.app[0].packetSize 512
+config **.app[0].sendInterval 0.05s
 
 vector 0 CampusNetwork.coreRouter.ethernet encapPk:vector(packetBytes) ETV
 attr interpolationmode none

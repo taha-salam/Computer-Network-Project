@@ -1,8 +1,8 @@
 version 3
-run Static-0-20260507-22:35:05-8340
+run Static-0-20260509-15:58:18-13936
 attr configname Static
-attr datetime 20260507-22:35:05
-attr datetimef 20260507-223505
+attr datetime 20260509-15:58:18
+attr datetimef 20260509-155818
 attr experiment Static
 attr inifile omnetpp.ini
 attr iterationvars ""
@@ -10,7 +10,7 @@ attr iterationvarsd ""
 attr iterationvarsf ""
 attr measurement ""
 attr network CampusNetwork
-attr processid 8340
+attr processid 13936
 attr repetition 0
 attr replication #0
 attr resultdir results
@@ -45,8 +45,7 @@ config record-eventlog false
 config debug-on-errors false
 config **.vector-recording false
 config **.scalar-recording true
-config **.app[0].sendInterval 0.05s
-config *.scenarioManager.script "xml(\"<script><at t='60.0'><set-param submodule='coreRouter.ethg[0].channel' name='disabled' value='true'/><set-param submodule='seRouter.ethg[0].channel' name='disabled' value='true'/></at><at t='120.0'><set-param submodule='coreRouter.ethg[0].channel' name='disabled' value='false'/><set-param submodule='seRouter.ethg[0].channel' name='disabled' value='false'/></at></script>\")"
+config *.scenarioManager.script "xml(\"<script><at t='60.0'><set-channel-param src-module='coreRouter' src-gate='ethg$o[0]' par='disabled' value='true'/><set-channel-param src-module='seRouter' src-gate='ethg$o[0]' par='disabled' value='true'/></at><at t='120.0'><set-channel-param src-module='coreRouter' src-gate='ethg$o[0]' par='disabled' value='false'/><set-channel-param src-module='seRouter' src-gate='ethg$o[0]' par='disabled' value='false'/></at></script>\")"
 config **.seHost*.app[0].typename TrafficGenerator
 config **.eeHost*.app[0].typename TrafficGenerator
 config **.bbaHost*.app[0].typename TrafficGenerator
@@ -59,6 +58,7 @@ config **.app[0].destPort 1234
 config **.app[0].startTime 1s
 config **.app[0].stopTime 175s
 config **.app[0].packetSize 512
+config **.app[0].sendInterval 0.05s
 
 vector 0 CampusNetwork.coreRouter.ethernet encapPk:vector(packetBytes) ETV
 attr interpolationmode none
